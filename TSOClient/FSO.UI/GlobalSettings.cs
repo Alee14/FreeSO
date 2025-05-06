@@ -19,10 +19,10 @@ namespace FSO.Client
                         defaultInstance.DPIScaleFactor = 1; //sanity check
                     if (defaultInstance.ChatWindowsOpacity == 0 || defaultInstance.ChatWindowsOpacity > 1)
                         defaultInstance.ChatWindowsOpacity = 1; //sanity check
-                    if (defaultInstance.GameEntryUrl == "http://api.freeso.org")
+                    if (defaultInstance.GameEntryUrl == "http://fapi.alee14.me")
                     {
-                        defaultInstance.GameEntryUrl = "https://api.freeso.org";
-                        defaultInstance.CitySelectorUrl = "https://api.freeso.org";
+                        defaultInstance.GameEntryUrl = "https://fapi.alee14.me";
+                        defaultInstance.CitySelectorUrl = "https://fapi.alee14.me";
                     }
 
                 }
@@ -64,8 +64,8 @@ namespace FSO.Client
             { "SurroundingLotMode", "2" },
 
             { "UseCustomServer", "true" },
-            { "GameEntryUrl", "http://api.freeso.org" },
-            { "CitySelectorUrl", "http://api.freeso.org" },
+            { "GameEntryUrl", "http://fapi.alee14.me" },
+            { "CitySelectorUrl", "http://fapi.alee14.me" },
 
             { "TargetRefreshRate", "60" },
 
