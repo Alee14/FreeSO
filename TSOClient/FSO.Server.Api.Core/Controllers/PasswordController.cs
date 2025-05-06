@@ -35,7 +35,7 @@ namespace FSO.Server.Api.Core.Controllers
             }
 
             // No empty fields
-            if (model.username == null || model.new_password == null || model.old_password == null)
+            if (model.username == null || model.new_password == null || model.key == null)
             {
                 return ApiResponse.Json(HttpStatusCode.OK, new RegistrationError()
                 {
@@ -57,19 +57,28 @@ namespace FSO.Server.Api.Core.Controllers
                     });
                 }
 
-                var authSettings = da.Users.GetAuthenticationSettings(user.user_id);
-                var correct = PasswordHasher.Verify(model.old_password, new PasswordHash
-                {
-                    data = authSettings.data,
-                    scheme = authSettings.scheme_class
-                });
+                // var authSettings = da.Users.GetAuthenticationSettings(user.user_id);
+                // var correct = PasswordHasher.Verify(model.old_password, new PasswordHash
+                // {
+                //     data = authSettings.data,
+                //     scheme = authSettings.scheme_class
+                // });
 
-                if (!correct)
+                // if (!correct)
+                // {
+                //     return ApiResponse.Json(HttpStatusCode.OK, new RegistrationError()
+                //     {
+                //         error = "password_reset_failed",
+                //         error_description = "incorrect_password"
+                //     });
+                // }
+
+                if (!string.IsNullOrEmpty(api.Config.Regkey) && api.Config.Regkey != user.key)
                 {
                     return ApiResponse.Json(HttpStatusCode.OK, new RegistrationError()
                     {
-                        error = "password_reset_failed",
-                        error_description = "incorrect_password"
+                        error = "key_wrong",
+                        error_description = failReason
                     });
                 }
 
@@ -238,7 +247,7 @@ namespace FSO.Server.Api.Core.Controllers
     {
         public string username { get; set; }
         public string old_password { get; set; }
-        public string new_password { get; set; }
+        public string key { get; set; }
     }
 
     public class PasswordResetUseTokenModel
