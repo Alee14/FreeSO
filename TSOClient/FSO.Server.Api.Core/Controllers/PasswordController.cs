@@ -73,12 +73,12 @@ namespace FSO.Server.Api.Core.Controllers
                 //     });
                 // }
 
-                if (!string.IsNullOrEmpty(api.Config.Regkey) && api.Config.Regkey != user.key)
+                if (!string.IsNullOrEmpty(api.Config.Regkey) && api.Config.Regkey != model.key)
                 {
                     return ApiResponse.Json(HttpStatusCode.OK, new RegistrationError()
                     {
                         error = "key_wrong",
-                        error_description = failReason
+                        error_description = "key_invalid"
                     });
                 }
 
@@ -246,7 +246,7 @@ namespace FSO.Server.Api.Core.Controllers
     public class PasswordResetModel
     {
         public string username { get; set; }
-        public string old_password { get; set; }
+        public string new_password { get; set; }
         public string key { get; set; }
     }
 
